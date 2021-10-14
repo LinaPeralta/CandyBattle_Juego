@@ -24,7 +24,7 @@ public class Twinkie {
 
 	public void pintarWaffle(PApplet app) {
 		app.imageMode(app.CENTER);
-		app.image(TWINKIE, x, y);
+		app.image(TWINKIE, x, y,100,100);
 		app.imageMode(app.CORNER);
 	}
 

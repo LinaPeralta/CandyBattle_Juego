@@ -24,7 +24,7 @@ public class Waffle {
 
 	public void pintarWaffle(PApplet app) {
 		app.imageMode(app.CENTER);
-		app.image(WAFFLE, x, y);
+		app.image(WAFFLE, x, y, 100,100);
 		app.imageMode(app.CORNER);
 	}
 

@@ -43,7 +43,7 @@ public class Main extends PApplet implements IObserver{
 		finishScreen = new FinishScreen(this);
 		
 		//aja cambio de pantallas
-		screen = 1;
+		screen = 4;
 		
 	}
 	
