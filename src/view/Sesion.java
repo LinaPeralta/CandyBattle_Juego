@@ -23,6 +23,10 @@ public class Sesion extends Thread{
 		this.id = id;
 	}
 	
+	public Sesion() {
+		
+	}
+	
 	@Override
 	public void run() {
 		try {
@@ -38,6 +42,7 @@ public class Sesion extends Thread{
 			
 			recibirMensaje();
 			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,7 +55,6 @@ public class Sesion extends Thread{
 					while(true) {
 						try {
 							String msj = bf.readLine(); 
-							
 							observer.notificarMensaje(this, msj);
 
 						} catch (Exception e) {
@@ -72,8 +76,20 @@ public class Sesion extends Thread{
 		}).start();
 		
 	}
+	
+	
+
+	
 
 	public String getID() {
 		return this.id;
 	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
+	
 }

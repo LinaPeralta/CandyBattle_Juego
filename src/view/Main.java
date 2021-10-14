@@ -1,8 +1,11 @@
 package view;
 
+import com.google.gson.Gson;
+
+import model.Jugador;
 import processing.core.PApplet;
 
-public class Main extends PApplet implements IObserver{
+public class Main extends PApplet implements IObserver {
 
 	//TCP
 	private TCPConnection tcp;
@@ -13,6 +16,9 @@ public class Main extends PApplet implements IObserver{
 	private ConnectionScreen connectionScreen;
 	private GameScreen gameScreen;
 	private FinishScreen finishScreen;
+	
+	private Sesion sesion;
+	
 	
 	//Cambio de pantallas
 	private int screen;
@@ -25,25 +31,32 @@ public class Main extends PApplet implements IObserver{
 	@Override
 	public void settings() {
 		size(1200,700);
-		
+
 	}
-	
+
 	@Override
 	public void setup() {
-	
-		//clase TPC
+
+		// clase TPC
 		tcp = TCPConnection.getInstance();
 		tcp.setObserver(this);
 		
-		//Clase pantallas
+	
+		// Clase pantallas
 		startScreen = new StartScreen(this);
 		instructionsScreen = new InstructionScreen(this);
 		connectionScreen = new ConnectionScreen(this);
 		gameScreen = new GameScreen(this);
 		finishScreen = new FinishScreen(this);
 		
-		//aja cambio de pantallas
-		screen = 4;
+		sesion= new Sesion();
+
+		// aja cambio de pantallas
+		screen = 1;
+		
+		
+
+
 		
 	}
 	
@@ -80,6 +93,8 @@ public class Main extends PApplet implements IObserver{
 	@Override
 	public void mousePressed() {
 		
+		sesion.enviarMensaje("hola desde el server xdxd");
+		
 		switch (screen) {
 		//Start screen 
 		case 1:
@@ -100,6 +115,9 @@ public class Main extends PApplet implements IObserver{
 			}
 		//Game screen	
 		case 4:
+			
+			
+			
 			if (mouseX > 515 && mouseX < 706 && mouseY > 605 && mouseY < 671) {
 					screen = 5;
 			}
@@ -121,6 +139,8 @@ public class Main extends PApplet implements IObserver{
 
 	@Override
 	public void notificarMensaje(Sesion sesion, String mensaje) {
+		
+
 		
 		
 	}

@@ -35,14 +35,15 @@ public class TCPConnection extends Thread{
 			try {
 				
 				System.out.println("Iniciando servidor");
-				server = new ServerSocket(9000);
+				server = new ServerSocket(5000);
 				
 				while(sesiones.size() < 2) {
 					System.out.println("Esperando clientes");
 					Socket socket = server.accept(); 
 					
-					Sesion sesion = new Sesion(socket, observer, "jugador" + sesiones.size());
+					Sesion sesion = new Sesion(socket, observer, "Jugador" +sesiones.size());
 					sesiones.add(sesion);
+					System.out.println("Jugador" +sesiones.size());
 					sesion.start();
 					System.out.println("Cliente "+ sesiones.size() + " conectado");
 				}
