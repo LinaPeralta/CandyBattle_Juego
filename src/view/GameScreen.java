@@ -284,7 +284,7 @@ public class GameScreen implements IObserver {
 	
 	public void jugadorDispara() {
 		
-		// Player 1 cuando le dispara al enemigo basico
+		
 				for (int i = 0; i < Jugador1.getBalitas().size(); i++) {
 					for (int j = 0; j < twinkies1.size(); j++) {
 
@@ -299,7 +299,7 @@ public class GameScreen implements IObserver {
 
 						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
 								waffles1.get(k).getX(), waffles1.get(k).getY()) < 25) {
-							puntaje1 += 5;
+							puntaje1 += 6;
 							waffles1.remove(k);
 						}
 					}
@@ -308,11 +308,40 @@ public class GameScreen implements IObserver {
 
 						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
 								mints1.get(l).getX(), mints1.get(l).getY()) < 25) {
-							puntaje1 += 5;
+							puntaje1 += 7;
 							mints1.remove(l);
 						}
 					}
-				}		
+				}
+				
+				for (int i = 0; i < Jugador2.getBalitas().size(); i++) {
+					for (int j = 0; j < twinkies2.size(); j++) {
+
+						if (PApplet.dist(Jugador2.getBalitas().get(i).getX(), Jugador2.getBalitas().get(i).getY(),
+								twinkies2.get(j).getX(), twinkies2.get(j).getY()) < 25) {
+							puntaje2 += 5;
+							twinkies1.remove(j);
+						}
+					}
+					
+					for (int k = 0; k < waffles2.size(); k++) {
+
+						if (PApplet.dist(Jugador2.getBalitas().get(i).getX(), Jugador2.getBalitas().get(i).getY(),
+								waffles2.get(k).getX(), waffles2.get(k).getY()) < 25) {
+							puntaje2 += 6;
+							waffles2.remove(k);
+						}
+					}
+					
+					for (int l = 0; l < mints2.size(); l++) {
+
+						if (PApplet.dist(Jugador2.getBalitas().get(i).getX(), Jugador2.getBalitas().get(i).getY(),
+								mints2.get(l).getX(), mints2.get(l).getY()) < 25) {
+							puntaje2 += 7;
+							mints2.remove(l);
+						}
+					}
+				}
 	}
 	
 	
