@@ -247,45 +247,32 @@ public class GameScreen implements IObserver {
 			System.out.println("waffles2: " + waffles2.size());
 
 			// numero random para generar los diferentes enemigos
-			float num = (int) app.random(0, 10);
+			int num = (int) app.random(0, 10);
 
 			if (seg < 15) {
 
-				if (num == 1) {
-					// mints
-
-					mints1.add(new Mint(app, x1, y1, 3));
-					System.out.println("mints1: " + mints1.size());
-
-					mints2.add(new Mint(app, x2, y2, 3));
-					System.out.println("mints2: " + mints2.size());
-
-				}
-
-			}
-
-			else if (seg >= 15) {
-				if (num == 1 || num == 3 || num == 6) {
-					// arrayList, pintar y mover los twinkies
-
-					twinkies1.add(new Twinkie(app, x1, y1, 5));
+				if (num == 1 || num == 3 || num == 6|| num == 9) {
+					
+					
+					twinkies1.add(new Twinkie(app, x1, y1, 3));
 					System.out.println("twinkie1: " + twinkies1.size());
 
-					twinkies2.add(new Twinkie(app, x2, y2, 5));
+					twinkies2.add(new Twinkie(app, x2, y2, 3));
 					System.out.println("twinkie2: " + twinkies2.size());
 
 				}
 
 			}
 
-			else if (seg >= 30) {
+
+			 if (seg < 15) {
 
 				if (num == 1 || num == 2 || num == 5 || num == 7 || num == 8 || num == 9) {
 					// ALIENS ROJOS
-					mints1.add(new Mint(app, x1, y1, 3));
+					mints1.add(new Mint(app, x1, y1, 4));
 					System.out.println(mints1.size());
 
-					mints2.add(new Mint(app, x2, y2, 3));
+					mints2.add(new Mint(app, x2, y2, 4));
 					System.out.println(mints2.size());
 				}
 
@@ -360,4 +347,14 @@ public class GameScreen implements IObserver {
 		}
 
 	}
+
+	public boolean isGameOver() {
+		return GameOver;
+	}
+
+	public void setGameOver(boolean gameOver) {
+		GameOver = gameOver;
+	}
+	
+	
 }

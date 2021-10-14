@@ -16,6 +16,7 @@ public class Main extends PApplet implements IObserver {
 	private ConnectionScreen connectionScreen;
 	private GameScreen gameScreen;
 	private FinishScreen finishScreen;
+	boolean GameOver;
 	
 	private Sesion sesion;
 	
@@ -41,6 +42,8 @@ public class Main extends PApplet implements IObserver {
 		tcp = TCPConnection.getInstance();
 		tcp.setObserver(this);
 		
+		
+		
 	
 		// Clase pantallas
 		startScreen = new StartScreen(this);
@@ -50,6 +53,9 @@ public class Main extends PApplet implements IObserver {
 		finishScreen = new FinishScreen(this);
 		
 		sesion= new Sesion();
+		
+	
+		
 
 		// aja cambio de pantallas
 		screen = 4;
