@@ -113,6 +113,7 @@ public class GameScreen implements IObserver {
 		pintarEnemigos();
 		initJugadores(); 
 		desaparecerEnemigos();
+		jugadorDispara();
 		timer();
 
 	}
@@ -280,6 +281,40 @@ public class GameScreen implements IObserver {
 		}
 
 	}
+	
+	public void jugadorDispara() {
+		
+		// Player 1 cuando le dispara al enemigo basico
+				for (int i = 0; i < Jugador1.getBalitas().size(); i++) {
+					for (int j = 0; j < twinkies1.size(); j++) {
+
+						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
+								twinkies1.get(j).getX(), twinkies1.get(j).getY()) < 25) {
+							puntaje1 += 5;
+							twinkies1.remove(j);
+						}
+					}
+					
+					for (int k = 0; k < waffles1.size(); k++) {
+
+						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
+								waffles1.get(k).getX(), waffles1.get(k).getY()) < 25) {
+							puntaje1 += 5;
+							waffles1.remove(k);
+						}
+					}
+					
+					for (int l = 0; l < mints1.size(); l++) {
+
+						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
+								mints1.get(l).getX(), mints1.get(l).getY()) < 25) {
+							puntaje1 += 5;
+							mints1.remove(l);
+						}
+					}
+				}		
+	}
+	
 	
 	public void timer() {
 		
