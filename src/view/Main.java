@@ -52,9 +52,7 @@ public class Main extends PApplet implements IObserver {
 		sesion= new Sesion();
 
 		// aja cambio de pantallas
-		screen = 1;
-		
-		
+		screen = 4;
 
 
 		
@@ -93,7 +91,6 @@ public class Main extends PApplet implements IObserver {
 	@Override
 	public void mousePressed() {
 		
-		sesion.enviarMensaje("hola desde el server xdxd");
 		
 		switch (screen) {
 		//Start screen 

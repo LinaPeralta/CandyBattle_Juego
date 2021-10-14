@@ -77,10 +77,6 @@ public class Sesion extends Thread{
 		
 	}
 	
-	
-
-	
-
 	public String getID() {
 		return this.id;
 	}

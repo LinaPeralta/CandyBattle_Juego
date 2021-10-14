@@ -34,12 +34,19 @@ public class GameScreen implements IObserver {
 	// variables
 	private int count;
 	private int seg;
+	
+	boolean GameOver;
+	
+	int  puntaje1, puntaje2;
 
 	// arraylist
 
 	ArrayList<Waffle> waffles1, waffles2;
 	ArrayList<Mint> mints1, mints2;
 	ArrayList<Twinkie> twinkies1, twinkies2;
+	
+	//timer
+	int s, m, h;
 
 	public GameScreen(PApplet app) {
 
@@ -52,7 +59,6 @@ public class GameScreen implements IObserver {
 
 		gson = new Gson();
 		
-	
 
 		// arraylists
 		waffles1 = new ArrayList<Waffle>();
@@ -73,28 +79,44 @@ public class GameScreen implements IObserver {
 		
 		tcp = TCPConnection.getInstance();
 		tcp.setObserver(this);
+		
+		s = 0;
+		m = 59;
+		h = 0;
+		
+		GameOver= false;
+		
+		puntaje1=0;
+		puntaje2=0;
 
 	}
 
 	public void draw() {
 		// img fondo
 		app.image(game, 0, 0, 1200, 700);
+		
+		app.text(puntaje1, 280, 40);
+		app.text(puntaje2, 925, 40);
 
 		// contadores
 		count++;
+		
+		if(m==0) {
+		
+				
+		GameOver=true;
+		}
 
 		initWaffle();
 		initMint();
 		initTwinkie();
 		pintarEnemigos();
 		initJugadores(); 
-		
-	
+		desaparecerEnemigos();
+		timer();
 
 	}
 	
-
-
 
 	public void initWaffle() {
 
@@ -146,6 +168,62 @@ public class GameScreen implements IObserver {
 
 			twinkies2.get(i).pintarWaffle(app);
 			twinkies2.get(i).mover();
+		}
+	}
+	
+	public void desaparecerEnemigos() {
+		for (int i = 0; i < twinkies1.size(); i++) {
+
+			if (twinkies1.get(i).getY()>600) {
+				twinkies1.remove(i);
+			}
+
+		}
+
+		for (int i = 0; i < twinkies2.size(); i++) {
+
+			if (twinkies2.get(i).getY()>600) {
+				twinkies2.remove(i);
+			}
+		}
+		
+		
+
+		// arrayList, pintar y mover los mints
+		for (int i = 0; i < mints1.size(); i++) {
+
+			if (mints1.get(i).getY()>600) {
+				mints1.remove(i);
+			}
+		
+
+		}
+
+		for (int i = 0; i < mints2.size(); i++) {
+
+			if (mints2.get(i).getY()>600) {
+				mints2.remove(i);
+			}
+
+		}
+
+		// arrayList, pintar y mover los waffles
+		for (int i = 0; i < waffles1.size(); i++) {
+
+			if (waffles1.get(i).getY()>600) {
+				waffles1.remove(i);
+			}
+			
+
+		}
+
+		for (int i = 0; i < waffles2.size(); i++) {
+
+			if (waffles2.get(i).getY()>600) {
+				waffles2.remove(i);
+			}
+			
+
 		}
 	}
 
@@ -215,6 +293,34 @@ public class GameScreen implements IObserver {
 		}
 
 	}
+	
+	public void timer() {
+		
+		app.fill(0);
+		app.textSize(35);
+
+		if (s <= 59) {
+			
+			s = s + 1;
+			app.text(h + " : " + m, 550, 40);
+			
+		} else {
+			
+			m = m - 1;
+			s = 0;
+		}
+		if (m <= 59) {
+			
+		
+
+		} else {
+			
+			h = 0;
+			m = 0;
+		}
+	}
+	
+	
 
 	private void initJugadores() {
 
@@ -240,7 +346,6 @@ public class GameScreen implements IObserver {
 	public void notificarMensaje(Sesion sesion, String mensaje) {
 		
 		if (sesion.getID().equals("Jugador0")) {
-			
 			Jugador jugador = gson.fromJson(mensaje, Jugador.class);
             System.out.println("el mensaje al jugador fue:  "+jugador);
 			Jugador1.setAccion(jugador.getAccion());
