@@ -56,6 +56,7 @@ public class Sesion extends Thread{
 						try {
 							String msj = bf.readLine(); 
 							observer.notificarMensaje(this, msj);
+							observer.cambioPantallas( msj);
 
 						} catch (Exception e) {
 							e.printStackTrace();

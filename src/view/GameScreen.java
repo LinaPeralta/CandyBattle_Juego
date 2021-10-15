@@ -423,6 +423,12 @@ public class GameScreen implements IObserver {
 	public void setGameOver(boolean gameOver) {
 		GameOver = gameOver;
 	}
+
+	@Override
+	public void cambioPantallas(String mensaje) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

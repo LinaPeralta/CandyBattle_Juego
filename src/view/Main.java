@@ -58,7 +58,7 @@ public class Main extends PApplet implements IObserver {
 		
 
 		// aja cambio de pantallas
-		screen = 4;
+		screen = 1;
 
 
 		
@@ -143,9 +143,17 @@ public class Main extends PApplet implements IObserver {
 	@Override
 	public void notificarMensaje(Sesion sesion, String mensaje) {
 		
-
-		
-		
 	}
+
+
+	@Override
+	public void cambioPantallas(String mensaje) {
+		
+	
+		if (mensaje.equals("instrucciones")) {
+			screen=2;
+	}
+	
+}
 	
 }
