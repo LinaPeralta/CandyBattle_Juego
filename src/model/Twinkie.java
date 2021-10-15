@@ -22,7 +22,7 @@ public class Twinkie {
 		move = true;
 	}
 
-	public void pintarWaffle(PApplet app) {
+	public void pintarTwinkie(PApplet app) {
 		app.imageMode(app.CENTER);
 		app.image(TWINKIE, x, y,100,100);
 		app.imageMode(app.CORNER);

@@ -75,7 +75,7 @@ public class GameScreen implements IObserver {
 
 		// contadores
 		count = 0;
-		seg = 0;
+		//seg = 0;
 		
 		tcp = TCPConnection.getInstance();
 		tcp.setObserver(this);
@@ -113,6 +113,7 @@ public class GameScreen implements IObserver {
 		pintarEnemigos();
 		initJugadores(); 
 		desaparecerEnemigos();
+		jugadorDispara();
 		timer();
 
 	}
@@ -160,13 +161,13 @@ public class GameScreen implements IObserver {
 		// arrayList, pintar y mover los Twinkies
 		for (int i = 0; i < twinkies1.size(); i++) {
 
-			twinkies1.get(i).pintarWaffle(app);
+			twinkies1.get(i).pintarTwinkie(app);
 			twinkies1.get(i).mover();
 		}
 
 		for (int i = 0; i < twinkies2.size(); i++) {
 
-			twinkies2.get(i).pintarWaffle(app);
+			twinkies2.get(i).pintarTwinkie(app);
 			twinkies2.get(i).mover();
 		}
 	}
@@ -240,25 +241,19 @@ public class GameScreen implements IObserver {
 			int y2 = 50;
 			// int velocidad = 2;
 
-			waffles1.add(new Waffle(app, x1, y1, 2));
+			waffles1.add(new Waffle(app, x1, y1, 1));
 			System.out.println("waffles1: " + waffles1.size());
 
-			waffles2.add(new Waffle(app, x2, y2, 2));
+			waffles2.add(new Waffle(app, x2, y2, 1));
 			System.out.println("waffles2: " + waffles2.size());
 
 			// numero random para generar los diferentes enemigos
-			float num = (int) app.random(0, 10);
+			int num = (int) app.random(0, 10);
 
-			if (seg < 15) {
+			if (s < 50) {
 
-				if (num == 1 || num == 3 || num == 6) {
-					// mints
+				if (num == 0 || num == 3 || num == 6) {
 
-//					mints1.add(new Mint(app, x1, y1, 3));
-//					System.out.println("mints1: " + mints1.size());
-//
-//					mints2.add(new Mint(app, x2, y2, 3));
-//					System.out.println("mints2: " + mints2.size());
 					
 					twinkies1.add(new Twinkie(app, x1, y1, 2));
 					System.out.println("twinkie1: " + twinkies1.size());
@@ -269,22 +264,9 @@ public class GameScreen implements IObserver {
 				}
 
 			}
-//
-//			else if (seg >= 15) {
-//				if (num == 1 || num == 3 || num == 6) {
-//					// arrayList, pintar y mover los twinkies
-//
-//					twinkies1.add(new Twinkie(app, x1, y1, 5));
-//					System.out.println("twinkie1: " + twinkies1.size());
-//
-//					twinkies2.add(new Twinkie(app, x2, y2, 5));
-//					System.out.println("twinkie2: " + twinkies2.size());
-//
-//				}
-//
-//			}
 
-			else if (seg >= 30) {
+
+			 if (s < 40) {
 
 				if (num == 1 || num == 2 || num == 5 || num == 7 || num == 8 || num == 9) {
 					// ALIENS ROJOS
@@ -299,6 +281,73 @@ public class GameScreen implements IObserver {
 		}
 
 	}
+	
+	public void jugadorDispara() {
+		
+		
+				for (int i = 0; i < Jugador1.getBalitas().size(); i++) {
+					for (int j = 0; j < twinkies1.size(); j++) {
+
+						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
+								twinkies1.get(j).getX(), twinkies1.get(j).getY()) < 25) {
+							puntaje1 += 5;
+							twinkies1.remove(j);
+						}
+					}
+					
+					for (int k = 0; k < waffles1.size(); k++) {
+
+						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
+								waffles1.get(k).getX(), waffles1.get(k).getY()) < 25) {
+							puntaje1 += 6;
+							waffles1.remove(k);
+						}
+					}
+					
+					for (int l = 0; l < mints1.size(); l++) {
+
+						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
+								mints1.get(l).getX(), mints1.get(l).getY()) < 25) {
+							puntaje1 += 7;
+							mints1.remove(l);
+						}
+					}
+					
+					tcp.getSesiones().get(0).enviarMensaje(" " + puntaje1);
+				}
+				
+				for (int i = 0; i < Jugador2.getBalitas().size(); i++) {
+					for (int j = 0; j < twinkies2.size(); j++) {
+
+						if (PApplet.dist(Jugador2.getBalitas().get(i).getX(), Jugador2.getBalitas().get(i).getY(),
+								twinkies2.get(j).getX(), twinkies2.get(j).getY()) < 25) {
+							puntaje2 += 5;
+							twinkies1.remove(j);
+						}
+					}
+					
+					for (int k = 0; k < waffles2.size(); k++) {
+
+						if (PApplet.dist(Jugador2.getBalitas().get(i).getX(), Jugador2.getBalitas().get(i).getY(),
+								waffles2.get(k).getX(), waffles2.get(k).getY()) < 25) {
+							puntaje2 += 6;
+							waffles2.remove(k);
+						}
+					}
+					
+					for (int l = 0; l < mints2.size(); l++) {
+
+						if (PApplet.dist(Jugador2.getBalitas().get(i).getX(), Jugador2.getBalitas().get(i).getY(),
+								mints2.get(l).getX(), mints2.get(l).getY()) < 25) {
+							puntaje2 += 7;
+							mints2.remove(l);
+						}
+					}
+					
+					tcp.getSesiones().get(0).enviarMensaje(" " + puntaje2);
+				}
+	}
+	
 	
 	public void timer() {
 		
@@ -366,4 +415,14 @@ public class GameScreen implements IObserver {
 		}
 
 	}
+
+	public boolean isGameOver() {
+		return GameOver;
+	}
+
+	public void setGameOver(boolean gameOver) {
+		GameOver = gameOver;
+	}
+	
+	
 }
