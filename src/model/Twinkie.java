@@ -16,13 +16,13 @@ public class Twinkie {
 	public Twinkie(PApplet app, int x, int y, int velocidad) {
 		TWINKIE = app.loadImage("data/TWINKIE.png");
 
-		this.x = x;
-		this.y = y;
+		this.x = x; 
+		this.y = y;  
 		this.velocidad = velocidad;
 		move = true;
 	}
 
-	public void pintarWaffle(PApplet app) {
+	public void pintarTwinkie(PApplet app) {
 		app.imageMode(app.CENTER);
 		app.image(TWINKIE, x, y,100,100);
 		app.imageMode(app.CORNER);

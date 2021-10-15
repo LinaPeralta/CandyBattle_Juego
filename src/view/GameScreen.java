@@ -75,7 +75,7 @@ public class GameScreen implements IObserver {
 
 		// contadores
 		count = 0;
-		seg = 0;
+		//seg = 0;
 		
 		tcp = TCPConnection.getInstance();
 		tcp.setObserver(this);
@@ -161,13 +161,13 @@ public class GameScreen implements IObserver {
 		// arrayList, pintar y mover los Twinkies
 		for (int i = 0; i < twinkies1.size(); i++) {
 
-			twinkies1.get(i).pintarWaffle(app);
+			twinkies1.get(i).pintarTwinkie(app);
 			twinkies1.get(i).mover();
 		}
 
 		for (int i = 0; i < twinkies2.size(); i++) {
 
-			twinkies2.get(i).pintarWaffle(app);
+			twinkies2.get(i).pintarTwinkie(app);
 			twinkies2.get(i).mover();
 		}
 	}
@@ -235,30 +235,30 @@ public class GameScreen implements IObserver {
 
 			count = 0;
 			int x1 = (int) app.random(50, 500);
-			int y1 = 50;
+			int y1 = 150;
 
-			int x2 = (int) app.random(600, 1200);
-			int y2 = 50;
+			int x2 = (int) app.random(610, 1200);
+			int y2 = 150;
 			// int velocidad = 2;
 
-			waffles1.add(new Waffle(app, x1, y1, 2));
+			waffles1.add(new Waffle(app, x1, y1, 1));
 			System.out.println("waffles1: " + waffles1.size());
 
-			waffles2.add(new Waffle(app, x2, y2, 2));
+			waffles2.add(new Waffle(app, x2, y2, 1));
 			System.out.println("waffles2: " + waffles2.size());
 
 			// numero random para generar los diferentes enemigos
 			int num = (int) app.random(0, 10);
 
-			if (seg < 15) {
+			if (s <= 50) { 
 
-				if (num == 1 || num == 3 || num == 6|| num == 9) {
+				if (num == 0 || num == 3 || num == 6) {
+
 					
-					
-					twinkies1.add(new Twinkie(app, x1, y1, 3));
+					twinkies1.add(new Twinkie(app, x1, y1, 2));
 					System.out.println("twinkie1: " + twinkies1.size());
 
-					twinkies2.add(new Twinkie(app, x2, y2, 3));
+					twinkies2.add(new Twinkie(app, x2, y2, 2));
 					System.out.println("twinkie2: " + twinkies2.size());
 
 				}
@@ -266,14 +266,14 @@ public class GameScreen implements IObserver {
 			}
 
 
-			 if (seg < 15) {
+			 if (s <= 40) {
 
 				if (num == 1 || num == 2 || num == 5 || num == 7 || num == 8 || num == 9) {
 					// ALIENS ROJOS
-					mints1.add(new Mint(app, x1, y1, 4));
+					mints1.add(new Mint(app, x1, y1, 3));
 					System.out.println(mints1.size());
 
-					mints2.add(new Mint(app, x2, y2, 4));
+					mints2.add(new Mint(app, x2, y2, 3));
 					System.out.println(mints2.size());
 				}
 
@@ -292,6 +292,7 @@ public class GameScreen implements IObserver {
 								twinkies1.get(j).getX(), twinkies1.get(j).getY()) < 25) {
 							puntaje1 += 5;
 							twinkies1.remove(j);
+							//Jugador1.getBalitas().remove(i);
 						}
 					}
 					
@@ -301,6 +302,7 @@ public class GameScreen implements IObserver {
 								waffles1.get(k).getX(), waffles1.get(k).getY()) < 25) {
 							puntaje1 += 6;
 							waffles1.remove(k);
+							//Jugador1.getBalitas().remove(i);
 						}
 					}
 					
@@ -310,6 +312,7 @@ public class GameScreen implements IObserver {
 								mints1.get(l).getX(), mints1.get(l).getY()) < 25) {
 							puntaje1 += 7;
 							mints1.remove(l);
+							//Jugador1.getBalitas().remove(i);
 						}
 					}
 					
@@ -323,6 +326,7 @@ public class GameScreen implements IObserver {
 								twinkies2.get(j).getX(), twinkies2.get(j).getY()) < 25) {
 							puntaje2 += 5;
 							twinkies1.remove(j);
+							//Jugador2.getBalitas().remove(i);
 						}
 					}
 					
@@ -332,6 +336,7 @@ public class GameScreen implements IObserver {
 								waffles2.get(k).getX(), waffles2.get(k).getY()) < 25) {
 							puntaje2 += 6;
 							waffles2.remove(k);
+							//Jugador2.getBalitas().remove(i);
 						}
 					}
 					
@@ -341,10 +346,11 @@ public class GameScreen implements IObserver {
 								mints2.get(l).getX(), mints2.get(l).getY()) < 25) {
 							puntaje2 += 7;
 							mints2.remove(l);
+							//Jugador2.getBalitas().remove(i);
 						}
 					}
 					
-					tcp.getSesiones().get(0).enviarMensaje(" " + puntaje2);
+					tcp.getSesiones().get(1).enviarMensaje(" " + puntaje2);
 				}
 	}
 	
@@ -402,14 +408,13 @@ public class GameScreen implements IObserver {
 		
 		if (sesion.getID().equals("Jugador0")) {
 			Jugador jugador = gson.fromJson(mensaje, Jugador.class);
-            System.out.println("el mensaje al jugador fue:  "+jugador);
 			Jugador1.setAccion(jugador.getAccion());
 			Jugador1.moverJugador();
 
 		} else if (sesion.getID().equals("Jugador1")) {
 
 			Jugador jugador = gson.fromJson(mensaje, Jugador.class);
-			Jugador2.setAccion(jugador.getAccion());
+			Jugador2.setAccion(jugador.getAccion()); 
 			Jugador2.moverJugador();
 
 		}
@@ -418,7 +423,7 @@ public class GameScreen implements IObserver {
 
 	public boolean isGameOver() {
 		return GameOver;
-	}
+	} 
 
 	public void setGameOver(boolean gameOver) {
 		GameOver = gameOver;

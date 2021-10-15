@@ -15,8 +15,8 @@ public class Bala {
 		
 		public void draw(PApplet app) {
 			
-				app.fill (255);
-				app.ellipse (x, y, 20, 20);
+				app.fill (50,23,16);
+				app.rect (x+10,y,5,20);
 			
 		}
 		

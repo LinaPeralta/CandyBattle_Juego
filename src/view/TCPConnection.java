@@ -37,7 +37,7 @@ public class TCPConnection extends Thread{
 				System.out.println("Iniciando servidor");
 				server = new ServerSocket(5000);
 				
-				while(sesiones.size() < 2) {
+				while(sesiones.size() < 2) { 
 					System.out.println("Esperando clientes");
 					Socket socket = server.accept(); 
 					

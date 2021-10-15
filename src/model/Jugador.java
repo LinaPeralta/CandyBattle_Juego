@@ -11,7 +11,7 @@ public class Jugador {
 	
 	public Jugador (int x, int y, String accion) {
 		this.x = x;
-		this.y=y;
+		this.y=y;  
 		this.velocidad = 30;
 		this.accion = accion;
 		

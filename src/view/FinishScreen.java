@@ -8,7 +8,7 @@ public class FinishScreen {
 	private PApplet app;
 	private PImage finish;
 	
-	public FinishScreen (PApplet app) {
+	public FinishScreen (PApplet app) {  
 		this.app = app;
 		finish= app.loadImage("./data/FinishScreen.png");
 		

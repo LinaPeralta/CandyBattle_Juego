@@ -56,14 +56,16 @@ public class Sesion extends Thread{
 						try {
 							String msj = bf.readLine(); 
 							observer.notificarMensaje(this, msj);
-							observer.cambioPantallas( msj);
+							observer.cambioPantallas(msj);
+							System.out.println(msj);
+							
 
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
 				}).start();	
-	}
+	}  
 	
 	public void enviarMensaje(String mensaje) {
 		new Thread(()->{
