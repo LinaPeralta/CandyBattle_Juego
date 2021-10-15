@@ -16,7 +16,7 @@ public class Main extends PApplet implements IObserver {
 	private ConnectionScreen connectionScreen;
 	private GameScreen gameScreen;
 	private FinishScreen finishScreen;
-	boolean GameOver;
+	//boolean GameOver;
 	
 	private Sesion sesion;
 	
@@ -92,6 +92,10 @@ public class Main extends PApplet implements IObserver {
 			break;
 
 		}
+		
+		if(gameScreen.isGameOver()) {
+			screen=5;
+		}
 	}
 	
 	@Override
@@ -134,6 +138,8 @@ public class Main extends PApplet implements IObserver {
 			break;
 		}
 	}
+	
+	
 	
 	
 

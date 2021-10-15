@@ -94,7 +94,7 @@ public class GameScreen implements IObserver {
 	public void draw() {
 		// img fondo
 		app.image(game, 0, 0, 1200, 700);
-		
+		 
 		app.text(puntaje1, 280, 40);
 		app.text(puntaje2, 925, 40);
 
@@ -284,7 +284,7 @@ public class GameScreen implements IObserver {
 	
 	public void jugadorDispara() {
 		
-		
+		//jugador 1
 				for (int i = 0; i < Jugador1.getBalitas().size(); i++) {
 					for (int j = 0; j < twinkies1.size(); j++) {
 
@@ -319,6 +319,7 @@ public class GameScreen implements IObserver {
 					tcp.getSesiones().get(0).enviarMensaje(" " + puntaje1);
 				}
 				
+				//Jugador 2
 				for (int i = 0; i < Jugador2.getBalitas().size(); i++) {
 					for (int j = 0; j < twinkies2.size(); j++) {
 
@@ -434,6 +435,56 @@ public class GameScreen implements IObserver {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public PImage getJ1() {
+		return j1;
+	}
+
+	public void setJ1(PImage j1) {
+		this.j1 = j1;
+	}
+
+	public PImage getJ2() {
+		return j2;
+	}
+
+	public void setJ2(PImage j2) {
+		this.j2 = j2;
+	}
+
+	public Jugador getJugador1() {
+		return Jugador1;
+	}
+
+	public void setJugador1(Jugador jugador1) {
+		Jugador1 = jugador1;
+	}
+
+	public Jugador getJugador2() {
+		return Jugador2;
+	}
+
+	public void setJugador2(Jugador jugador2) {
+		Jugador2 = jugador2;
+	}
+
+	public int getPuntaje1() {
+		return puntaje1;
+	}
+
+	public void setPuntaje1(int puntaje1) {
+		this.puntaje1 = puntaje1;
+	}
+
+	public int getPuntaje2() {
+		return puntaje2;
+	}
+
+	public void setPuntaje2(int puntaje2) {
+		this.puntaje2 = puntaje2;
+	}
+	
+	
 	
 	
 }

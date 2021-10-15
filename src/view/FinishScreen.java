@@ -6,16 +6,41 @@ import processing.core.PImage;
 public class FinishScreen {
 	
 	private PApplet app;
-	private PImage finish;
+	private PImage finish,jugador1,jugador2;
+	private GameScreen gameScreen;
 	
-	public FinishScreen (PApplet app) {  
+	
+	public FinishScreen (PApplet app) {    
 		this.app = app;
 		finish= app.loadImage("./data/FinishScreen.png");
+		jugador1= app.loadImage("./data/jugador1.png");
+		jugador2= app.loadImage("./data/jugador2.png");
+		gameScreen = new GameScreen(app);
 		
 	}
 	
 	public void draw() {
 		app.image(finish, 0, 0, 1200, 700);
+		
+		if(gameScreen.getPuntaje1()> gameScreen.getPuntaje2()) {
+			app.image(jugador1, 450, 300,300,300);
+			app.textSize(45);
+			app.fill(50,23,16);
+			app.text(gameScreen.getPuntaje1(), 550, 280);
+			
+		}else if(gameScreen.getPuntaje2()> gameScreen.getPuntaje1()) {
+			app.image(jugador2, 450, 300,300,300);
+			app.textSize(45);
+			app.fill(50,23,16);
+			app.text(gameScreen.getPuntaje2(), 550, 280);
+		}
+		else if(gameScreen.getPuntaje2()== gameScreen.getPuntaje1()) {
+			app.image(jugador2, 620, 300,300,300);
+			app.image(jugador1, 280, 300,300,300);
+			app.textSize(45);
+			app.fill(50,23,16);
+			app.text(gameScreen.getPuntaje2(), 550, 280);
+		}
 	}
 
 }
