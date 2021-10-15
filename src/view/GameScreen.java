@@ -312,6 +312,8 @@ public class GameScreen implements IObserver {
 							mints1.remove(l);
 						}
 					}
+					
+					tcp.getSesiones().get(0).enviarMensaje(" " + puntaje1);
 				}
 				
 				for (int i = 0; i < Jugador2.getBalitas().size(); i++) {
@@ -341,6 +343,8 @@ public class GameScreen implements IObserver {
 							mints2.remove(l);
 						}
 					}
+					
+					tcp.getSesiones().get(0).enviarMensaje(" " + puntaje2);
 				}
 	}
 	
