@@ -21,6 +21,7 @@ public class Twinkie {
 		this.velocidad = velocidad;
 		move = true;
 	}
+	//pintar enemigo
 
 	public void pintarTwinkie(PApplet app) {
 		app.imageMode(app.CENTER);
@@ -28,6 +29,7 @@ public class Twinkie {
 		app.imageMode(app.CORNER);
 	}
 
+	//mover enemigo
 	public void mover() {
 
 		if (move) {

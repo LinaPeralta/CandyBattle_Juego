@@ -17,30 +17,33 @@ public class GameScreen implements IObserver {
 
 	private PApplet app;
 	
-	
-	
 	private TCPConnection tcp;
 	
 	private PImage game, j1, j2;
 
+	//clases enemigos
 	Waffle waffle;
 	Mint mint;
 	Twinkie twinkie;
 
+	//clase jugador
 	Jugador Jugador1, Jugador2;
 
+	//serializacion
 	private Gson gson;
 
 	// variables
 	private int count;
 	private int seg;
-	
+	int  puntaje1, puntaje2;	
 	boolean GameOver;
 	
-	int  puntaje1, puntaje2;
+	//jugadores variables
+	int x1,y1;
+	
 
-	// arraylist
 
+	// arraylist enemigos
 	ArrayList<Waffle> waffles1, waffles2;
 	ArrayList<Mint> mints1, mints2;
 	ArrayList<Twinkie> twinkies1, twinkies2;
@@ -48,19 +51,22 @@ public class GameScreen implements IObserver {
 	//timer
 	int s, m, h;
 
+	
 	public GameScreen(PApplet app) {
 
-		// img fondo
 		this.app = app;
+		
+		// img fondo
 		game = app.loadImage("./data/GameScreen.png");
 
+		//img jugadores
 		j1 = app.loadImage("./data/jugador1.png");
 		j2 = app.loadImage("./data/jugador2.png");
 
+		//serializacion
 		gson = new Gson();
 		
-
-		// arraylists
+		// arraylists enemigos
 		waffles1 = new ArrayList<Waffle>();
 		mints1 = new ArrayList<Mint>();
 		twinkies1 = new ArrayList<Twinkie>();
@@ -75,19 +81,25 @@ public class GameScreen implements IObserver {
 
 		// contadores
 		count = 0;
-		//seg = 0;
 		
+		//coneccion 
 		tcp = TCPConnection.getInstance();
 		tcp.setObserver(this);
 		
+		//timer
 		s = 0;
 		m = 59;
 		h = 0;
 		
 		GameOver= false;
 		
-		puntaje1=0;
+		//puntajes
+		puntaje1=50;
 		puntaje2=0;
+		
+		x1= Jugador1.getX();
+		y1= Jugador1.getY();
+		
 
 	}
 
@@ -95,30 +107,37 @@ public class GameScreen implements IObserver {
 		// img fondo
 		app.image(game, 0, 0, 1200, 700);
 		 
+		//puntajes en pantalla
 		app.text(puntaje1, 280, 40);
 		app.text(puntaje2, 925, 40);
 
 		// contadores
 		count++;
-		
-		if(m==0) {
-		
-				
-		GameOver=true;
+
+		//condicion finalizar juego
+		if (m == 0) {
+
+			GameOver = true;
 		}
 
+		
+	
+		
 		initWaffle();
 		initMint();
 		initTwinkie();
 		pintarEnemigos();
 		initJugadores(); 
-		desaparecerEnemigos();
-		jugadorDispara();
-		timer();
+		//desaparecerEnemigos();
+		//jugadorDispara();
+	//	timer();
+		
+		
+		
 
 	}
 	
-
+///inicializacion enemigos
 	public void initWaffle() {
 
 		// arrayList, pintar y mover los waffles
@@ -171,8 +190,11 @@ public class GameScreen implements IObserver {
 			twinkies2.get(i).mover();
 		}
 	}
+
 	
+	///eliminar enemigos
 	public void desaparecerEnemigos() {
+		
 		for (int i = 0; i < twinkies1.size(); i++) {
 
 			if (twinkies1.get(i).getY()>600) {
@@ -190,7 +212,7 @@ public class GameScreen implements IObserver {
 		
 		
 
-		// arrayList, pintar y mover los mints
+	
 		for (int i = 0; i < mints1.size(); i++) {
 
 			if (mints1.get(i).getY()>600) {
@@ -208,7 +230,7 @@ public class GameScreen implements IObserver {
 
 		}
 
-		// arrayList, pintar y mover los waffles
+		// 
 		for (int i = 0; i < waffles1.size(); i++) {
 
 			if (waffles1.get(i).getY()>600) {
@@ -229,6 +251,7 @@ public class GameScreen implements IObserver {
 	}
 
 	public void pintarEnemigos() {
+		
 		// INTERVALOS DE TIEMPO
 		// waffles
 		if (count == 60) {
@@ -242,10 +265,10 @@ public class GameScreen implements IObserver {
 			// int velocidad = 2;
 
 			waffles1.add(new Waffle(app, x1, y1, 1));
-			System.out.println("waffles1: " + waffles1.size());
+			//System.out.println("waffles1: " + waffles1.size());
 
 			waffles2.add(new Waffle(app, x2, y2, 1));
-			System.out.println("waffles2: " + waffles2.size());
+			//System.out.println("waffles2: " + waffles2.size());
 
 			// numero random para generar los diferentes enemigos
 			int num = (int) app.random(0, 10);
@@ -256,10 +279,10 @@ public class GameScreen implements IObserver {
 
 					
 					twinkies1.add(new Twinkie(app, x1, y1, 2));
-					System.out.println("twinkie1: " + twinkies1.size());
+					//System.out.println("twinkie1: " + twinkies1.size());
 
 					twinkies2.add(new Twinkie(app, x2, y2, 2));
-					System.out.println("twinkie2: " + twinkies2.size());
+					//System.out.println("twinkie2: " + twinkies2.size());
 
 				}
 
@@ -271,10 +294,10 @@ public class GameScreen implements IObserver {
 				if (num == 1 || num == 2 || num == 5 || num == 7 || num == 8 || num == 9) {
 					// ALIENS ROJOS
 					mints1.add(new Mint(app, x1, y1, 3));
-					System.out.println(mints1.size());
+					//System.out.println(mints1.size());
 
 					mints2.add(new Mint(app, x2, y2, 3));
-					System.out.println(mints2.size());
+					//System.out.println(mints2.size());
 				}
 
 			}
@@ -284,11 +307,11 @@ public class GameScreen implements IObserver {
 	
 	public void jugadorDispara() {
 		
-		//jugador 1
-				for (int i = 0; i < Jugador1.getBalitas().size(); i++) {
+		//jugador 1 dispara
+				for (int i = 0; i < Jugador1.getBalas().size(); i++) {
 					for (int j = 0; j < twinkies1.size(); j++) {
 
-						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
+						if (PApplet.dist(Jugador1.getBalas().get(i).getX(), Jugador1.getBalas().get(i).getY(),
 								twinkies1.get(j).getX(), twinkies1.get(j).getY()) < 25) {
 							puntaje1 += 5;
 							twinkies1.remove(j);
@@ -298,7 +321,7 @@ public class GameScreen implements IObserver {
 					
 					for (int k = 0; k < waffles1.size(); k++) {
 
-						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
+						if (PApplet.dist(Jugador1.getBalas().get(i).getX(), Jugador1.getBalas().get(i).getY(),
 								waffles1.get(k).getX(), waffles1.get(k).getY()) < 25) {
 							puntaje1 += 6;
 							waffles1.remove(k);
@@ -308,7 +331,7 @@ public class GameScreen implements IObserver {
 					
 					for (int l = 0; l < mints1.size(); l++) {
 
-						if (PApplet.dist(Jugador1.getBalitas().get(i).getX(), Jugador1.getBalitas().get(i).getY(),
+						if (PApplet.dist(Jugador1.getBalas().get(i).getX(), Jugador1.getBalas().get(i).getY(),
 								mints1.get(l).getX(), mints1.get(l).getY()) < 25) {
 							puntaje1 += 7;
 							mints1.remove(l);
@@ -316,14 +339,15 @@ public class GameScreen implements IObserver {
 						}
 					}
 					
+					//enviar puntaje al control
 					tcp.getSesiones().get(0).enviarMensaje(" " + puntaje1);
 				}
 				
-				//Jugador 2
-				for (int i = 0; i < Jugador2.getBalitas().size(); i++) {
+				//Jugador 2 dispara
+				for (int i = 0; i < Jugador2.getBalas().size(); i++) {
 					for (int j = 0; j < twinkies2.size(); j++) {
 
-						if (PApplet.dist(Jugador2.getBalitas().get(i).getX(), Jugador2.getBalitas().get(i).getY(),
+						if (PApplet.dist(Jugador2.getBalas().get(i).getX(), Jugador2.getBalas().get(i).getY(),
 								twinkies2.get(j).getX(), twinkies2.get(j).getY()) < 25) {
 							puntaje2 += 5;
 							twinkies1.remove(j);
@@ -333,7 +357,7 @@ public class GameScreen implements IObserver {
 					
 					for (int k = 0; k < waffles2.size(); k++) {
 
-						if (PApplet.dist(Jugador2.getBalitas().get(i).getX(), Jugador2.getBalitas().get(i).getY(),
+						if (PApplet.dist(Jugador2.getBalas().get(i).getX(), Jugador2.getBalas().get(i).getY(),
 								waffles2.get(k).getX(), waffles2.get(k).getY()) < 25) {
 							puntaje2 += 6;
 							waffles2.remove(k);
@@ -343,7 +367,7 @@ public class GameScreen implements IObserver {
 					
 					for (int l = 0; l < mints2.size(); l++) {
 
-						if (PApplet.dist(Jugador2.getBalitas().get(i).getX(), Jugador2.getBalitas().get(i).getY(),
+						if (PApplet.dist(Jugador2.getBalas().get(i).getX(), Jugador2.getBalas().get(i).getY(),
 								mints2.get(l).getX(), mints2.get(l).getY()) < 25) {
 							puntaje2 += 7;
 							mints2.remove(l);
@@ -351,6 +375,7 @@ public class GameScreen implements IObserver {
 						}
 					}
 					
+					//enviar puntaje al control
 					tcp.getSesiones().get(1).enviarMensaje(" " + puntaje2);
 				}
 	}
@@ -386,31 +411,38 @@ public class GameScreen implements IObserver {
 
 	private void initJugadores() {
 
-		// Jugador1
-		app.image(j1, Jugador1.getX(), Jugador1.getY());
+		
+		// inicializar Jugador1
+		app.image(j1, x1, y1);
 
-		for (int i = 0; i < Jugador1.getBalitas().size(); i++) {
-			Jugador1.getBalitas().get(i).draw(app);
-			Jugador1.getBalitas().get(i).moveBullet();
+		for (int i = 0; i < Jugador1.getBalas().size(); i++) {
+			System.out.println(Jugador1.getX()); 
+			Jugador1.getBalas().get(i).draw(app);
+			Jugador1.getBalas().get(i).moveBullet();
 		}
+		
 
-		// Jugador2
+		// inicializar Jugador2
 		app.image(j2, Jugador2.getX(), Jugador2.getY());
 
-		for (int i = 0; i < Jugador2.getBalitas().size(); i++) {
-			Jugador2.getBalitas().get(i).draw(app);
-			Jugador2.getBalitas().get(i).moveBullet();
+		for (int i = 0; i < Jugador2.getBalas().size(); i++) {
+			Jugador2.getBalas().get(i).draw(app);
+			Jugador2.getBalas().get(i).moveBullet();
 		}
 
 	}
 
 	@Override
-	public void notificarMensaje(Sesion sesion, String mensaje) {
+	public void recibirMensaje(Sesion sesion, String mensaje) {
+		
+		
 		
 		if (sesion.getID().equals("Jugador0")) {
 			Jugador jugador = gson.fromJson(mensaje, Jugador.class);
 			Jugador1.setAccion(jugador.getAccion());
 			Jugador1.moverJugador();
+			
+
 
 		} else if (sesion.getID().equals("Jugador1")) {
 
@@ -419,9 +451,9 @@ public class GameScreen implements IObserver {
 			Jugador2.moverJugador();
 
 		}
-
+		
 	}
-
+	
 	public boolean isGameOver() {
 		return GameOver;
 	} 
@@ -430,11 +462,6 @@ public class GameScreen implements IObserver {
 		GameOver = gameOver;
 	}
 
-	@Override
-	public void cambioPantallas(String mensaje) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public PImage getJ1() {
 		return j1;
@@ -483,7 +510,6 @@ public class GameScreen implements IObserver {
 	public void setPuntaje2(int puntaje2) {
 		this.puntaje2 = puntaje2;
 	}
-	
 	
 	
 	

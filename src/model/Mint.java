@@ -22,12 +22,14 @@ public class Mint {
 		move = true;
 	}
 
+	//dibujar enemigo
 	public void pintarMint(PApplet app) {
 		app.imageMode(app.CENTER);
 		app.image(MINT, x, y,100,100);
 		app.imageMode(app.CORNER);
 	}
 
+	//mover enemigo
 	public void mover() {
 
 		if (move) {

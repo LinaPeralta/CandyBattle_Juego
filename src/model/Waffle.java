@@ -22,12 +22,14 @@ public class Waffle {
 		move = true;
 	}
 
+	//pintar enemigo
 	public void pintarWaffle(PApplet app) {
 		app.imageMode(app.CENTER);
 		app.image(WAFFLE, x, y, 100,100);
 		app.imageMode(app.CORNER);
 	}
 
+	//mover enemigo
 	public void mover() {
 
 		if (move) {

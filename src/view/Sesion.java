@@ -30,12 +30,12 @@ public class Sesion extends Thread{
 	@Override
 	public void run() {
 		try {
-			//To receive
+			//recibir
 			InputStream is = socket.getInputStream();
 			InputStreamReader isr = new InputStreamReader(is);
 			bf = new BufferedReader(isr);
 			
-			//To transmit
+			//enviar
 			OutputStream os = socket.getOutputStream();
 			OutputStreamWriter osw = new OutputStreamWriter(os);
 			bw = new BufferedWriter(osw);
@@ -54,11 +54,9 @@ public class Sesion extends Thread{
 				() -> {
 					while(true) {
 						try {
-							String msj = bf.readLine(); 
-							observer.notificarMensaje(this, msj);
-							observer.cambioPantallas(msj);
-							System.out.println(msj);
-							
+							String mensaje = bf.readLine(); 
+							observer.recibirMensaje(this,mensaje);
+											
 
 						} catch (Exception e) {
 							e.printStackTrace();

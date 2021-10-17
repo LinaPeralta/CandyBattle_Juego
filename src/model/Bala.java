@@ -12,15 +12,16 @@ public class Bala {
 			this.y = y;
 			this.velocidad = 3;
 		}
-		
+		//dibujar bala
 		public void draw(PApplet app) {
+			
 			
 				app.fill (50,23,16);
 				app.rect (x+10,y,5,20);
 			
 		}
 		
-		//movimineto bala de player
+		//movimineto de la bala
 		public void moveBullet() {
 			y-=velocidad;
 		}
