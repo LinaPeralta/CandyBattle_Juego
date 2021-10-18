@@ -21,6 +21,8 @@ public class Main extends PApplet implements IObserver {
 
 	// Cambio de pantallas
 	private int screen;
+	
+	int count;
 
 	public static void main(String[] args) {
 		PApplet.main("view.Main");
@@ -47,8 +49,9 @@ public class Main extends PApplet implements IObserver {
 		finishScreen = new FinishScreen(this);
 
 		// aja cambio de pantallas
-		screen = 4;
+		screen = 1;
 
+		count=0;
 	}
 
 	@Override
@@ -67,10 +70,14 @@ public class Main extends PApplet implements IObserver {
 		// Connection screen
 		case 3:
 			connectionScreen.draw();
-			
 			//Revisar que esten conectados los clientes para permitir pasar de pantalla
-			if (tcp.getSesiones().size() == 1) {
+			if (tcp.getSesiones().size() == 2) {
 				System.out.println("usuarios conectados");
+				count++;
+				
+				if(count==200) {
+					screen=4;
+				}
 			}
 		
 

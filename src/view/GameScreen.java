@@ -128,9 +128,9 @@ public class GameScreen implements IObserver {
 		initTwinkie();
 		pintarEnemigos();
 		initJugadores(); 
-		//desaparecerEnemigos();
-		//jugadorDispara();
-	//	timer();
+		desaparecerEnemigos();
+		jugadorDispara();
+		timer();
 		
 		
 		
@@ -260,7 +260,7 @@ public class GameScreen implements IObserver {
 			int x1 = (int) app.random(50, 500);
 			int y1 = 150;
 
-			int x2 = (int) app.random(610, 1200);
+			int x2 = (int) app.random(620, 1200);
 			int y2 = 150;
 			// int velocidad = 2;
 
